@@ -1,0 +1,13 @@
+struct PloyNode{
+    int coef;       
+    int expon;      
+    struct PloyNode *link;  
+};
+typedef PloyNode* Ploynomial;
+
+typedef struct PloyNode* Ploynomial;
+struct PloyNode{
+    int coef;
+    int expon;
+    Ploynomial link;        //不用Ploynomial* ，Ploynomial 已经表示了struct PloyNode*
+};
