@@ -2,11 +2,10 @@
 #include<stdlib.h>
 #define ERROR -1
 #define MaxSize 101
-struct Node{
+typedef struct{
     ElementType Data;
     int Parent;
-    int rank;
-}S[MaxSize];
+}SetType;
 
 void Initialize(int size) {
     for(int i=0;i<size;i++){
@@ -15,28 +14,24 @@ void Initialize(int size) {
     }
 }
 
-int Find(ElementType X)
-{   //在数组S中查找值为X的元素所属的集合
-    if(S[X].Parent==X)
-        return X;
-    return Find(S[X].Parent);
+int Find(SetType S,ElementType X){   
+    //默认集合元素全部初始化为-1
+    if(S[X]<0)
+        return x;
+    else
+        return S[X]=Find(S,S[X]);
 }
 
-void Union(ElementType X1,ElementType X2){
+void Union(SetType S,ElementType X1,ElementType X2){
     
     int Root1=Find(X1);
     int Root2=Find(X2);
-    if(Root2==Root1)
-        return;
-    if(S[Root1].rank<S[Root2].rank) 
-        S[Root1].Parent=Root2;
-    else{
-        S[Root2].Parent=Root1;
-        if(S[Root1].rank==S[Root2].rank)
-            S[Root1].rank++;
+    if(S[Root2]<S[Root1]){
+        S[Root2]+=S[Root1];
+        S[Root1]=Root2; 
     }
-}
-
-bool SameSet(int x,int y){
-    return Find(x)==Find(y);
+    else{
+        S[Root1]+=S[Root2];
+        S[Root2]=Root1;
+    }
 }

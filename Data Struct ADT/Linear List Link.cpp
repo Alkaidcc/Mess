@@ -4,12 +4,19 @@
 typedef struct  LNode*List;
 struct LNode
 {
-    ElementType Data [MAXSIZE];
+    int Data;
     List Next;                   //如何访问元素 :L.Data[i]或PtrL->Data[i]
 };                              //线性表的长度：L.Last+1或PtrL->Last+1
 struct LNode L;
 List Ptrl;
 
+//初始化
+List creatNode(int value)
+{
+    List temp=malloc(sizeof(LNode));
+    temp->Data=value;
+    temp->Next=NULL;
+}
 
 //求表长
 
