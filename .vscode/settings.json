@@ -1,4 +1,16 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
-    "python.pythonPath": "C:\\Users\\akaid\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+    "python.pythonPath": "C:\\Users\\akaid\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
+    "files.associations": {
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "cfloat": "cpp",
+        "vector": "cpp",
+        "xiosbase": "cpp",
+        "queue": "cpp",
+        "array": "cpp",
+        "xstring": "cpp",
+        "stack": "cpp",
+        "iomanip": "cpp"
+    }
 }
