@@ -1,152 +1,58 @@
-
 #include<iostream>
-using namespace std;
 #include<string.h>
-#define OK 1
-#define ERROR 0
-#define OVERFLOW -2
-struct list
+#include<algorithm>
+using namespace std;
+#define MAXN 100010
+ 
+typedef struct Stu{
+    char stuNum[10];
+    char name[10];
+    int grade;
+}Stu;
+Stu student[MAXN];
+ 
+bool cmp1(Stu a,Stu b)
 {
-	int no;
-	char name[20];
-	float score;
-};
-typedef list ElemType;
-typedef int Status;
-typedef struct LNode
-{
-	ElemType  data;
-	struct  LNode* next;
-}LNode, * LinkList;
-Status InitList(LinkList& L)
-{
-	L = new LNode;
-	L->next = NULL;
-	return OK;
+    return strcmp(a.stuNum,b.stuNum) < 0;
 }
-void CreatList(LinkList& L,int i)
+ 
+bool cmp2(Stu a,Stu b)
 {
-	int j;
-	LNode* p;
-	LinkList r;
-	L = new LNode;
-	L->next = NULL;
-	r = L;
-     for(j=0;j<i;j++)
-	{
-		p = new LNode;
-		cin >> p->data.no>>p->data.name>>p->data.score;
-		p->next = NULL;
-		r->next = p;
-		r = p;
-	}
+    if(strcmp(a.name, b.name) == 0)
+        return cmp1(a, b);
+    else return strcmp(a.name,b.name) < 0;
 }
-Status GetElem(LinkList L, int i, ElemType& e)
+ 
+bool cmp3(Stu a,Stu b)
 {
-	LinkList p;
-	int j;
-	p = L->next;
-	j = 1;
-	while (p && j < i)
-	{
-		p = p->next;
-		++j;
-	}
-	if (!p || j > i) return ERROR;
-	e = p->data;
-	return OK;
+    if(a.grade == b.grade)
+        return cmp1(a,b);
+    else return a.grade < b.grade;
 }
-LNode* LocateElem(LinkList L, ElemType e)
-{
-	LinkList p;
-	p = L->next;
-	while (p&&p->data.no!= e.no&&p->data.name!=e.name&&p->data.score!=e.score)
-		p = p->next;
-	return p;
-}
-Status ListInsert(LinkList& L, int i, ElemType e)
-{
-	LinkList p, s;
-	int j;
-	p = L;
-	j = 0;
-	while (p && (j < i - 1))
-	{
-		p = p->next;
-		++j;
-	}
-	if (!p || j > i - 1)
-		return ERROR;
-	s = new LNode;
-	s->data = e;
-	s->next = p->next;
-	p->next = s;
-	return OK;
-}
-Status ListDelete(LinkList& L, int i, ElemType& e)
-{
-	LinkList p, q;
-	p = L;
-	int j = 0;
-	while (p->next && j < i - 1)
-	{
-		p = p->next;
-		++j;
-	}
-	if (!(p->next) || j > i - 1)
-		return ERROR;
-	q = p->next;
-	p->next = q->next;
-	e = q->data;
-	delete q;
-	return OK;
-}
-Status ListLength(LinkList L)
-{
-	LinkList p;
-	p = L;
-	int j = 0;
-	while (p->next != NULL)
-	{
-		j++;
-		p = p->next;
-	}
-	return j;
-}
-void Union(LinkList& LA, LinkList LB)
-{
-	int m, n, i;
-	ElemType e;
-	m = ListLength(LA);
-	n = ListLength(LB);
-	for (i = 1;i <= n;i++)
-	{
-		GetElem(LB, i, e);
-		if (!LocateElem(LA, e))
-			ListInsert(LA, ++m, e);
-	}
-}
-void printf(LinkList LA)
-{
-	LNode* p;
-	p = LA->next;
-	while (p)
-	{
-		cout <<'('<< p->data.no << ','<<p->data.name<<','<<p->data.score<<')'<<endl;
-		p = p->next;
-    }
-
-}
-
+ 
 int main()
 {
-	LinkList LA, LB;
-	CreatList(LA,4);
-	CreatList(LB,3);
-	Union(LA, LB);
-	char p[20]="result:";
-	cout << p << endl;
-	printf(LA);
-	system("pause");
-	return 0;
+    int n,a;
+    scanf("%d %d",&n,&a);
+    for(int i = 0;i<n;i++)
+    {
+       scanf("%s %s %d",student[i].stuNum, student[i].name,&student[i].grade);
+    }
+    switch(a) {
+        case 1:
+            sort(student,student+n,cmp1);
+            break;
+        case 2:
+            sort(student,student+n,cmp2);
+            break;
+        case 3:
+            sort(student,student+n,cmp3);
+            break;
+    }
+    for(int i = 0;i<n;i++)
+    {
+        printf("%s %s %d\n",student[i].stuNum, student[i].name, student[i].grade);
+    }
+    system("pause");
+    return 0;
 }

@@ -113,8 +113,8 @@ Linklist addNode(int value){
     temp->next = NULL;
     return temp;
 }
-void ListInsert_L(Linklist L,int value){
-    while(L->next != NULL){
+void ListInsert_L(Linklist L, int value){
+    while (L->next != NULL) {
         L = L->next;
     }
     L->next = addNode(value);
