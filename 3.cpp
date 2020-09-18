@@ -2,7 +2,7 @@
 Filename		:3.cpp
 Date			:2020/09/18 08:40:16
 Author			:ZZC
-Description     :
+Description     :复制字符串（不能用库函数） void copy_str(char *p1, char *p2)
 */
 #include <iostream>
 using namespace std;

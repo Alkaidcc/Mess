@@ -2,7 +2,7 @@
 Filename		:1.cpp
 Date			:2020/09/18 08:06:49
 Author			:ZZC
-Description     :
+Description     :求某个整数的平方 int square(int x)
 */
 #include <iostream>
 using namespace std;
