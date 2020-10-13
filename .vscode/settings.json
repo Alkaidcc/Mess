@@ -91,6 +91,7 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "string_view": "cpp"
     }
 }

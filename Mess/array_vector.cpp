@@ -13,8 +13,8 @@ int main(){
     a2[1] = 1.0/5.0;
     a2[2] = 1.0/7.0;
     a2[3] = 1.0/9.0;
-    array<double,4> a3 = {3.14,2.72,1.62,1.41};
-    array<double,4> a4;
+    vector<double,4> a3 = {3.14,2.72,1.62,1.41};
+    vector<double,4> a4;
     a4 = a3;        //valid for array objects of same size;
     auto ptr =a2;   //valid
     cout << ptr[1] << endl;
