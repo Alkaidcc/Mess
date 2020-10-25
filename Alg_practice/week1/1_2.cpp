@@ -18,11 +18,12 @@ void average_time_sort(int n);
 void average_time_sort(int n){
     vector<int> myv(n);
     clock_t passed_time = 0;      //累计总时间
-    const int times =100;         //定义排序的次数
+    const int times =1;         //定义排序的次数
     for(int i = 0;i < times;i++){
         srand((unsigned)time(NULL));
         for(int i = 0;i < n;i++){
             myv[i] = rand() % n + 1;
+            cout << myv[i] << " ";
         }
         clock_t start_time = clock();   //开始的时间
         sort(myv.begin(), myv.end());   
@@ -35,8 +36,8 @@ void average_time_sort(int n){
 
 int main(){
     const vector<int> n = {100,1000,10000,100000,1000000,10000000};
-    for(int i = 0;i < 6;i++){
-    average_time_sort(n[i]);
+    for(int i = 0;i < 5;i++){
+        average_time_sort(10);
     }
     system("pause");
     return 0;

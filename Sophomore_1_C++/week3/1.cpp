@@ -20,6 +20,6 @@ int main(){
     int n;
     cin >> n;
     hanoi('A','B','C',n);
-    system("pause");
+    // system("pause");
     return 0;
 }
