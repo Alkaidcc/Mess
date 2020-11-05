@@ -63,22 +63,22 @@ int Queue::is_empty()
 
 int main() {
     int tmp;
-    Queue mystack;
+    Queue myqueue;
 
-    mystack.add(10);
-    mystack.add(20);
-    mystack.add(30);
-    mystack.add(50);
-    tmp = mystack.pop();
+    myqueue.add(10);
+    myqueue.add(20);
+    myqueue.add(30);
+    myqueue.add(50);
+    tmp = myqueue.pop();
     cout << "出队列：" << tmp << endl;
-    tmp = mystack.front();
+    tmp = myqueue.front();
     cout << "队头元素为" << tmp << endl;
-    mystack.add(40);
-    cout << "数组大小为" << mystack.size() << endl;
+    myqueue.add(40);
+    cout << "数组大小为" << myqueue.size() << endl;
     cout << "遍历该队列：" << endl;
-    while (!mystack.is_empty())
+    while (!myqueue.is_empty())
     {
-        tmp = mystack.pop();
+        tmp = myqueue.pop();
         cout << tmp << endl;
     }
     system("pause");
