@@ -8,7 +8,8 @@ int main(){
     }
     scanf("%d",&h);
     for(i=0;i<10;i++){
-        if((h+30)>=a[i])    cnt++;
+        if((h+30)>=a[i])
+            cnt++;
     }
     printf("%d",cnt);
     system("pause");

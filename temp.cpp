@@ -1,106 +1,241 @@
-#include <iostream>
-#include <deque>
-#include <vector>
-using namespace std;
-const int N = 8;
 
-class Maze{
-    private:
-        class Node{
-            public:
-                int x;
-                int y;
-                Node(int a = 0, int b = 0):x(a), y(b){}
-                // ~Node();
-                Node operator+ (const Node& other)const{
-                    Node node;
-                    node.x = x + other.x;
-                    node.y = y + other.y;
-                    return node;
-                }
-        };
-        deque<Node> path;
-        deque<Node> result;      
-        Node my_start; 
-        Node my_end;                                            
-        vector<vector<char>> myMaze = {
-            {'O','X','X','X','X','X','X','X'},
-            {'O','O','O','O','O','X','X','X'},
-            {'X','O','X','X','O','O','O','X'},
-            {'X','O','X','X','O','X','X','O'},
-            {'X','O','X','X','X','X','X','X'},
-            {'X','O','X','X','O','O','O','X'},
-            {'X','O','O','O','O','X','O','O'},
-            {'X','X','X','X','X','X','X','O'}
-        };           
-        static Node offset[4];              
-
-        void searchPath(deque<Node>& path, const Node& start, const Node& end){
-            if(start.x == end.x && start.y == end.y){
-                for(int i = 0;i < path.size();i++){
-                    result.push_back(path[i]);
-                }
-                return;
-            }
-            for(int i = 0;i < 4;i++){
-                Node nextNode = start + offset[i];
-                if(mv_to_next(start, nextNode)){
-                    myMaze[nextNode.x][nextNode.y] = '1';
-                    path.push_back(nextNode);
-                    searchPath(path,nextNode,end);
-                    myMaze[(*path.rbegin()).x][(*path.rbegin()).y] = 'O';
-                    path.pop_back();
-                }
-            }
-        }
-        bool mv_to_next(const Node& start, const Node& next){
-            int x = next.x;
-            int y = next.y;
-            if(x < 0 || x >= N || y < 0 || y >= N || myMaze[x][y] == 'X')
-                return false;
-            if(myMaze[x][y] == 'O')
-                return true;
-            else
-                return false;
-        }
-
-    public:
-        Maze(int s_x,int s_y, int e_x, int e_y);
-        void searchPath(){
-            searchPath(path, my_start, my_end);
-        }
-        void updatePath(){
-            myMaze[my_start.x][my_start.y] = '1';
-            for(size_t i = 0;i < result.size();i++){
-                myMaze[result[i].x][result[i].y] = '1';
-            }
-        }
-        void show_maze(){
-            for(int i = 0;i < myMaze.size();i++){
-                for(int j = 0;j < myMaze[0].size();j++){
-                    cout << myMaze[i][j];
-                }
-                cout << endl;
-            }       
-        }
-};
-
-
-Maze::Maze(int s_x,int s_y, int e_x, int e_y){
-    my_start = Node(s_x,s_y);
-    my_end = Node(e_x,e_y);
-    cout << "maze rows: " << N << ", cols: " << N << endl;
-    show_maze();
-}
-
-Maze::Node Maze::offset[4]= {Node(0,1), Node(1,0), Node(0,-1), Node(-1,0)};
-
-int main(){
-    Maze my_maze(0,0,7,7);
-    my_maze.searchPath();
-    my_maze.updatePath();
-    cout << "one path of the maze:" << endl;
-    my_maze.show_maze();
-    system("pause");
-    return 0;
-}
+guidePrice = scrapy.Field()         //厂商指导价
+subsidyPrice = scrapy.Field()       //补贴后售价
+referPrice = scrapy.Field()     //经销商参考价
+basicParam = scrapy.Field()      //基本参数
+Vendor = scrapy.Field()          //厂商
+Level = scrapy.Field()           //级别
+energyType = scrapy.Field()      //能源类型
+listedTime = scrapy.Field()      //上市时间
+Ministry of Industry and Information Technology pure electric cruising range (km) = scrapy.Field()
+Fast charge time (hours) = scrapy.Field()
+Slow charge time (hours) = scrapy.Field()
+Fast charge percentage = scrapy.Field()
+Maximum power (kW) = scrapy.Field()
+Maximum torque (N·m) = scrapy.Field()
+Motor (Ps) = scrapy.Field()
+Length * width * height (mm) = scrapy.Field()
+Body structure = scrapy.Field()
+Maximum speed (km/h) = scrapy.Field()
+Official 0-100km/h acceleration (s) = scrapy.Field()
+Measured 0-100km/h acceleration (s) = scrapy.Field()
+Measured 100-0km/h braking (m) = scrapy.Field()
+Measured cruising range (km) = scrapy.Field()
+Measured fast charging time (hours) = scrapy.Field()
+Measured slow charging time (hours) = scrapy.Field()
+Vehicle warranty = scrapy.Field()
+Body = scrapy.Field()
+Length(mm) = scrapy.Field()
+Width(mm) = scrapy.Field()
+Height (mm) = scrapy.Field()
+Wheelbase (mm) = scrapy.Field()
+Front track (mm) = scrapy.Field()
+Rear track (mm) = scrapy.Field()
+Minimum ground clearance (mm) = scrapy.Field()
+Body structure = scrapy.Field()
+Number of doors (pieces) = scrapy.Field()
+Number of seats (a) = scrapy.Field()
+Luggage compartment volume (L) = scrapy.Field()
+Curb weight (kg) = scrapy.Field()
+Electric motor = scrapy.Field()
+Motor type = scrapy.Field()
+Total motor power (kW) = scrapy.Field()
+Total motor torque (N·m) = scrapy.Field()
+Maximum power of front motor (kW) = scrapy.Field()
+Maximum torque of front motor (N·m) = scrapy.Field()
+Maximum power of rear motor (kW) = scrapy.Field()
+Maximum torque of rear motor (N·m) = scrapy.Field()
+System comprehensive power (kW) = scrapy.Field()
+System comprehensive torque (N·m) = scrapy.Field()
+Drive motor number = scrapy.Field()
+Motor layout = scrapy.Field()
+type of battery = scrapy.Field()
+Ministry of Industry and Information Technology pure electric cruising range (km) = scrapy.Field()
+Battery energy (kWh) = scrapy.Field()
+Power consumption per hundred kilometers (kWh/100km) = scrapy.Field()
+Battery pack warranty = scrapy.Field()
+Fast charge time (hours) = scrapy.Field()
+Slow charge time (hours) = scrapy.Field()
+Fast charging capacity (%) = scrapy.Field()
+Electric motor = scrapy.Field()
+Gearbox = scrapy.Field()
+Number of gears = scrapy.Field()
+Gearbox type = scrapy.Field()
+Abbreviation = scrapy.Field()
+Chassis steering = scrapy.Field()
+Drive way = scrapy.Field()
+Front suspension type = scrapy.Field()
+Rear suspension type = scrapy.Field()
+Type of assistance = scrapy.Field()
+Body structure = scrapy.Field()
+Wheel brake = scrapy.Field()
+Front brake type = scrapy.Field()
+Rear brake type = scrapy.Field()
+Parking brake type = scrapy.Field()
+Front tire specifications = scrapy.Field()
+Rear tire specifications = scrapy.Field()
+Spare tire specifications = scrapy.Field()
+Active/passive safety equipment = scrapy.Field()
+Main/passenger seat airbag = scrapy.Field()
+Front/rear side airbag = scrapy.Field()
+Front/rear head airbag (air curtain) = scrapy.Field()
+Knee airbag = scrapy.Field()
+Front passenger seat cushion airbag = scrapy.Field()
+Rear seat belt airbag = scrapy.Field()
+Rear seat anti-sliding airbag = scrapy.Field()
+Rear central airbag = scrapy.Field()
+Passive pedestrian protection = scrapy.Field()
+Tire pressure monitoring function = scrapy.Field()
+Run-flat tires = scrapy.Field()
+No seat belt reminder = scrapy.Field()
+ISOFIX child seat interface = scrapy.Field()
+ABS anti-lock = scrapy.Field()
+Braking force distribution (EBD/CBC, etc.) = scrapy.Field()
+Brake assist (EBA/BAS/BA, etc.) = scrapy.Field()
+Traction control (ASR/TCS/TRC, etc.) = scrapy.Field()
+Body stability control (ESC/ESP/DSC, etc.) = scrapy.Field()
+Parallel auxiliary = scrapy.Field()
+Lane Departure Warning System = scrapy.Field()
+Lane Keeping Assist System = scrapy.Field()
+Road traffic sign recognition = scrapy.Field()
+Active brake/active safety system = scrapy.Field()
+Night vision system = scrapy.Field()
+Tired driving tips = scrapy.Field()
+Auxiliary/control configuration = scrapy.Field()
+Front/rear parking radar = scrapy.Field()
+Driving assistance image = scrapy.Field()
+Reversing car side early warning system = scrapy.Field()
+Cruise system = scrapy.Field()
+Driving mode switching = scrapy.Field()
+Automatic parking = scrapy.Field()
+Automatic parking = scrapy.Field()
+Uphill assist = scrapy.Field()
+Steep slope = scrapy.Field()
+Variable suspension function = scrapy.Field()
+Air suspension = scrapy.Field()
+Electromagnetic induction suspension = scrapy.Field()
+Variable steering ratio = scrapy.Field()
+Limited slip differential/differential lock = scrapy.Field()
+Wading induction system = scrapy.Field()
+External/anti-theft configuration = scrapy.Field()
+Skylight type = scrapy.Field()
+Sport appearance kit = scrapy.Field()
+Electric spoiler = scrapy.Field()
+Wheel material = scrapy.Field()
+Electric suction door = scrapy.Field()
+Sliding door form = scrapy.Field()
+Electric trunk = scrapy.Field()
+Induction trunk = scrapy.Field()
+Position memory of electric trunk = scrapy.Field()
+Independent opening of tailgate glass = scrapy.Field()
+Roof rack = scrapy.Field()
+In-car central lock = scrapy.Field()
+Key type = scrapy.Field()
+Keyless start system = scrapy.Field()
+Keyless entry function = scrapy.Field()
+Active closed intake grille = scrapy.Field()
+Remote start function = scrapy.Field()
+Car side pedal = scrapy.Field()
+Battery preheating = scrapy.Field()
+Internal configuration = scrapy.Field()
+Steering wheel material = scrapy.Field()
+Steering wheel position adjustment = scrapy.Field()
+Multifunction steering wheel = scrapy.Field()
+Steering wheel shift = scrapy.Field()
+Steering wheel heating = scrapy.Field()
+Steering wheel memory = scrapy.Field()
+Trip computer display screen = scrapy.Field()
+Full LCD dashboard = scrapy.Field()
+LCD meter size = scrapy.Field()
+HUD head up digital display = scrapy.Field()
+Built-in driving recorder = scrapy.Field()
+Active noise reduction = scrapy.Field()
+Mobile phone wireless charging function = scrapy.Field()
+Electric adjustable pedal = scrapy.Field()
+Seat configuration = scrapy.Field()
+Seat material = scrapy.Field()
+Sport style seats = scrapy.Field()
+Main seat adjustment method = scrapy.Field()
+Sub-seat adjustment method = scrapy.Field()
+Main/passenger seat electric adjustment = scrapy.Field()
+Front seat function = scrapy.Field()
+Power seat memory function = scrapy.Field()
+Rear passenger seat adjustable button = scrapy.Field()
+Second row seat adjustment = scrapy.Field()
+Electric adjustment of rear seats = scrapy.Field()
+Rear seat function = scrapy.Field()
+Rear small table = scrapy.Field()
+Second row of independent seats = scrapy.Field()
+Seat layout = scrapy.Field()
+Rear seats down style = scrapy.Field()
+Power down the rear seats = scrapy.Field()
+Front/rear center armrest = scrapy.Field()
+Rear cup holder = scrapy.Field()
+Heating/cooling cup holder = scrapy.Field()
+Multimedia configuration = scrapy.Field()
+Central control color LCD screen = scrapy.Field()
+Central control LCD screen size = scrapy.Field()
+GPS navigation system = scrapy.Field()
+Navigation information display = scrapy.Field()
+Roadside assistance call = scrapy.Field()
+Central control LCD screen split screen display = scrapy.Field()
+Bluetooth/car phone = scrapy.Field()
+Mobile phone interconnection/mapping = scrapy.Field()
+Voice recognition control system = scrapy.Field()
+Gesture control = scrapy.Field()
+face recognition = scrapy.Field()
+Internet of Vehicles = scrapy.Field()
+OTA upgrade = scrapy.Field()
+Car TV = scrapy.Field()
+Rear LCD screen = scrapy.Field()
+Rear control multimedia = scrapy.Field()
+Multimedia/charging interface = scrapy.Field()
+Number of USB/Type-C ports = scrapy.Field()
+Car CD/DVD = scrapy.Field()
+220V/230V power supply = scrapy.Field()
+12V power interface in luggage compartment = scrapy.Field()
+Speaker brand name = scrapy.Field()
+Number of speakers = scrapy.Field()
+Lighting configuration = scrapy.Field()
+Low beam light source = scrapy.Field()
+High beam light source = scrapy.Field()
+Lighting features = scrapy.Field()
+LED daytime running lights = scrapy.Field()
+Adaptive far and near light = scrapy.Field()
+Automatic headlight = scrapy.Field()
+Turn assist lamp = scrapy.Field()
+Turn headlight = scrapy.Field()
+Front fog lights = scrapy.Field()
+Headlight rain and fog mode = scrapy.Field()
+Adjustable headlight height = scrapy.Field()
+Headlight cleaning device = scrapy.Field()
+Delayed headlight off = scrapy.Field()
+Touch reading light = scrapy.Field()
+Ambient lights in the car = scrapy.Field()
+Glass/Rearview Mirror = scrapy.Field()
+Front/rear power windows = scrapy.Field()
+One-key lift function of car window = scrapy.Field()
+Anti-pinch function on windows = scrapy.Field()
+Multilayer soundproof glass = scrapy.Field()
+Exterior mirror function = scrapy.Field()
+Inside rearview mirror function = scrapy.Field()
+Rear windshield sunshade = scrapy.Field()
+Rear side window shade = scrapy.Field()
+Rear side privacy glass = scrapy.Field()
+Car mirror = scrapy.Field()
+Rear wiper = scrapy.Field()
+Sensor wiper function = scrapy.Field()
+Heatable spout = scrapy.Field()
+Air conditioner/refrigerator = scrapy.Field()
+Air conditioning temperature control method = scrapy.Field()
+Independent rear air conditioner = scrapy.Field()
+Rear seat air outlet = scrapy.Field()
+Temperature zone control = scrapy.Field()
+Car air purifier = scrapy.Field()
+PM2.5 filter device in car = scrapy.Field()
+Negative ion generator = scrapy.Field()
+Fragrance device in car = scrapy.Field()
+Car refrigerator = scrapy.Field()
+Featured configuration = scrapy.Field()
+Adaptive Rotating Suspended Pad = scrapy.Field()
+Optional package = scrapy.Field()
